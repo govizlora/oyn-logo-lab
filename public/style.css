@@ -356,6 +356,12 @@ button:focus-visible {
   gap: clamp(12px, 2vw, 24px);
   font-size: 14px;
 }
+.site-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 32px;
+}
 .site-links a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -368,5 +374,18 @@ button:focus-visible {
   }
   .brand {
     font-size: 17px;
+  }
+}
+
+@media (max-width: 400px) {
+  header {
+    height: auto;
+    min-height: 48px;
+    flex-wrap: wrap;
+    gap: 0 12px;
+    padding: 6px 0;
+  }
+  .site-links {
+    margin-left: auto;
   }
 }
