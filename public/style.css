@@ -36,7 +36,6 @@ button {
   padding: 0 clamp(16px, 4vw, 68px) 32px;
 }
 header,
-.lead,
 .stagehead,
 .stagefoot,
 .panelhead,
@@ -62,23 +61,9 @@ header {
   font-weight: 400;
   color: #444;
 }
-.lead {
-  align-items: flex-end;
-  gap: 24px;
-  margin: 34px 0 30px;
-}
-.eyebrow {
-  margin: 0 0 2px;
-  font-size: 21px;
-  font-weight: 200;
-}
-.lead h1 {
-  font-size: clamp(34px, 3.8vw, 58px);
-  line-height: 1.04;
-  font-weight: 500;
-  margin: 0;
-}
 .modes {
+  justify-content: flex-end;
+  margin: 34px 0 30px;
   gap: 19px;
   flex-wrap: wrap;
 }
@@ -272,10 +257,7 @@ button:focus-visible {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  .lead {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
+  .modes {
     margin: 22px 0 16px;
   }
   .viewport {
@@ -283,9 +265,6 @@ button:focus-visible {
   }
   header {
     height: 48px;
-  }
-  .eyebrow {
-    font-size: 17px;
   }
   .modes a {
     padding: 3px 0;
