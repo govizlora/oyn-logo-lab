@@ -53,13 +53,14 @@
     Math.abs(x / step(id) - Math.round(x / step(id))) < 1e-9;
   const slug = para ? "P" : "M",
     key = "oyn-lab-v1-" + slug;
+  const defaultGuides = true;
   const qs = new URLSearchParams(location.search);
   let saved = {};
   try {
     saved = JSON.parse(localStorage.getItem(key) || "{}") || {};
   } catch {}
   let p = { ...defaults },
-    guides = qs.has("g") ? qs.get("g") === "1" : false;
+    guides = qs.has("g") ? qs.get("g") === "1" : defaultGuides;
   for (const [id, , min, max] of fields) {
     const raw = qs.has(id) ? qs.get(id) : qs.size ? undefined : saved[id];
     const x = Number(raw);
@@ -101,7 +102,7 @@
     try {
       localStorage.setItem(key, JSON.stringify(p));
       const q = new URLSearchParams(p);
-      if (guides) q.set("g", "1");
+      q.set("g", guides ? "1" : "0");
       history.replaceState(null, "", "?" + q);
     } catch {}
   }
@@ -147,7 +148,7 @@
   };
   $("#reset").onclick = () => {
     p = { ...defaults };
-    guides = false;
+    guides = defaultGuides;
     render();
     sync();
     $("#notice").textContent = "Defaults restored for this study.";
