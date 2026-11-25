@@ -79,41 +79,9 @@
     )
     .join("");
   document.getElementById("app").innerHTML =
-    `<div class="wrap"><header><div class="brand-tools"><a class="brand" href="/" aria-label="OYN / Logo Lab"><span class="brand-mark"><img src="/oyn-mirror-64u.svg" alt=""><span>OYN</span></span> / Logo Lab</a><button type="button" id="logo-toggle" aria-label="Use SVG wordmark" aria-pressed="true" aria-keyshortcuts="L" title="Switch logo (L)">L</button></div><nav class="site-links" aria-label="Project and author">${socialLinks}</nav></header><nav class="modes" aria-label="Letterform studies"><a href="/" ${para ? "" : 'aria-current="page"'}>Mirror</a><a href="/parallel.html" ${para ? 'aria-current="page"' : ""}>Parallel</a></nav>
+    `<div class="wrap"><header><a class="brand" href="/">OYN / Logo Lab</a><nav class="site-links" aria-label="Project and author">${socialLinks}</nav></header><nav class="modes" aria-label="Letterform studies"><a href="/" ${para ? "" : 'aria-current="page"'}>Mirror</a><a href="/parallel.html" ${para ? 'aria-current="page"' : ""}>Parallel</a></nav>
 <div class="layout"><div class="art"><section class="stage"><div class="stagehead"><strong>Pen study</strong><label class="toggle"><input id="guides" type="checkbox">Construction lines</label></div><div class="viewport" id="viewport"></div><div class="stagefoot"><span id="stats"></span><span>Solid black</span></div></section><section class="thumbproof" aria-label="Thumbnail preview"><div class="thumbmeta"><h2>Thumbnail</h2><label for="thumb-size">Preview size</label><select id="thumb-size"><option value="48">48 × 48 px</option><option value="128" selected>128 × 128 px</option><option value="256">256 × 256 px</option></select></div><svg id="thumb" width="128" height="128" role="img" aria-label="OYN thumbnail"><svg id="thumb-art" x="10%" y="10%" width="80%" height="80%" preserveAspectRatio="xMidYMid meet"><use href="#live-ink"/></svg></svg></section><p class="note">${para ? "Both branches lean in the same direction. The left stroke descends, the right stroke rises, and their centerlines stay parallel as the bowl joins them." : "The two branches mirror each other across a vertical axis. Change the angle to open or close the diamond; the stroke leaving the o stays tangent to its circle."}</p><p class="note">Blend reach controls all straight-to-circle transitions. Zero keeps a direct tangent; positive values ease the curvature over a longer distance, limited by the available turn.</p><div class="tools"><button class="primary" id="save">Export black SVG</button><button class="plain" id="reset">Reset</button></div><p class="notice" id="notice" role="status"></p></div>
 <aside class="panel"><div class="panelhead"><h2>Parameters</h2><span class="count">u = design units</span></div>${sections.map(([name, items]) => '<h3 class="group">' + name + "</h3>" + items.map(([id, label, min, max, u]) => `<div class="setting"><label for="s-${id}">${label}</label><span class="number"><input aria-label="${label} value" id="v-${id}" type="number" min="${min}" max="${max}" step="${step(id)}">${u}</span><input data-key="${id}" type="range" id="s-${id}" min="${min}" max="${max}" step="${step(id)}"></div>`).join("")).join("")}</aside></div></div>`;
-  const logoToggle = $("#logo-toggle");
-  const logoPreference = "oyn-lab-header-wordmark";
-  try {
-    logoToggle.setAttribute(
-      "aria-pressed",
-      String(sessionStorage.getItem(logoPreference) !== "text"),
-    );
-  } catch {}
-  logoToggle.onclick = () => {
-    const useSvg = logoToggle.getAttribute("aria-pressed") !== "true";
-    logoToggle.setAttribute("aria-pressed", String(useSvg));
-    try {
-      sessionStorage.setItem(logoPreference, useSvg ? "svg" : "text");
-    } catch {}
-  };
-  document.addEventListener("keydown", (event) => {
-    if (
-      event.key.toLowerCase() !== "l" ||
-      event.repeat ||
-      event.isComposing ||
-      event.altKey ||
-      event.ctrlKey ||
-      event.metaKey ||
-      event.shiftKey ||
-      event.defaultPrevented ||
-      event.target.isContentEditable ||
-      event.target.closest?.("input, textarea, select, [role=textbox]")
-    )
-      return;
-    event.preventDefault();
-    logoToggle.click();
-  });
   let shape;
   const svg = (g, pad) =>
     `<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="OYN ${para ? "parallel" : "mirrored"} wordmark" viewBox="${-pad} ${-pad} ${(shape.W + 2 * pad).toFixed(3)} ${(shape.H + 2 * pad).toFixed(3)}"><g stroke="#000">${shape.ink}</g>${g ? shape.guide : ""}</svg>`;

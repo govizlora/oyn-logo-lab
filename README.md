@@ -5,8 +5,6 @@ A small parametric drawing tool for one three-letter wordmark, not a font file.
 
 Drag a slider to change a radius, a stroke width, or the angle of the y. In **Mirror**, the two branches lean toward each other. In **Parallel**, they lean in the same direction. Turn on **Construction lines** to see the circles, tangents, and terminal cut that produce the mark.
 
-Press **L** or click the **L** button beside the header to compare the SVG wordmark with the text label. This does not change the drawing.
-
 ## Start here
 
 - [Geometry](public/geometry.js) — the drawing algorithm. `OYN.make(mode, parameters)` solves the centerlines and returns the SVG ink, construction guides, bounds, and a validity flag. The cubic transitions match the tangent and curvature of the adjoining circular and straight segments.
