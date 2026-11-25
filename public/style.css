@@ -49,7 +49,48 @@ header {
   height: 65px;
   border-bottom: 1px solid #aaa;
 }
+.brand-tools,
 .brand {
+  display: inline-flex;
+  align-items: center;
+}
+.brand-tools {
+  gap: 8px;
+}
+.brand-mark {
+  display: inline-grid;
+  place-items: center start;
+  width: 3.1em;
+}
+.brand-mark > * {
+  grid-area: 1 / 1;
+}
+.brand-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.brand-mark span {
+  visibility: hidden;
+}
+.brand-tools:has([aria-pressed="false"]) .brand-mark img {
+  visibility: hidden;
+}
+.brand-tools:has([aria-pressed="false"]) .brand-mark span {
+  visibility: visible;
+}
+#logo-toggle {
+  padding: 2px 5px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  font:
+    12px/1.2 ui-monospace,
+    monospace;
+  color: #555;
+}
+.brand {
+  gap: 5px;
+  white-space: nowrap;
   font-size: 20px;
   font-weight: 300;
 }
